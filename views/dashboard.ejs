@@ -1,0 +1,68 @@
+<%- include('layout.ejs'); %>
+<div class="container">
+    <div>
+            <div class="btn-group" role="group" aria-label="Basic example">
+
+
+
+
+                <form action= ""  method="post">
+
+            <button type="submit" class="btn btn-secondary" onclick="u_id()">Block</button>
+        </form>
+            <form action= ""  method="post">
+            <button type="submit" class="btn btn-secondary" onclick="u_id()">Delete</button>
+        </form>
+            <form action= ""  method="post">
+            <button type="submit" class="btn btn-secondary" onclick="u_id()">Unblock</button>
+            </form>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th><input type="checkbox" name="" id="q"></th>
+                    <th>Индентификатор</th>
+                    <th>Имя</th>
+                    <th>Создано</th>
+                    <th>Логин ласт</th>
+                    <th>Статус</th>
+                  </tr>
+                </thead>
+                <% user.forEach(u => { %>
+                <tbody>
+                    <tr>
+                        <div class="qq">
+                        <td><input type="checkbox" name="" class="q1" value = <%= u._id %>> </td>
+                        </div>
+                        <td><%= u._id %></td>
+                        <td><%= u.name %></td>
+                        <td><%= u.creaate_date %></td>
+                        <td> <%= u.login_date%></td>
+                        <td><%= u.statu %></td>
+                    </tr>
+                </tbody>
+           <%})%>
+        </table>
+
+<script>
+function u_id() { 
+    var id = [];
+$('input[type="checkbox"]:checked').each(function() {
+    id.push($(this).val());
+});
+            let actionJS = id;
+            document.getElementsByTagName('form')[0].action = '/dashboard/block/'+actionJS;
+            document.getElementsByTagName('form')[1].action = '/dashboard/del/'+actionJS;
+            document.getElementsByTagName('form')[2].action = '/dashboard/unblcok/'+actionJS;
+        }
+    $('#q').on('change', function(){
+    $('.q1').prop('checked', this.checked);
+    });
+</script>
+</div>
+<div>
+    <a href="/login"> <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Logout</button> </a>
+</div>
+</div>
+</body>
+</html>
